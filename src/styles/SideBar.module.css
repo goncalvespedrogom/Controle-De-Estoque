@@ -1,0 +1,156 @@
+.sidebar {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #1a2a41;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0px 10px 10px 0;
+    position: fixed; /* mantém fixo na tela */
+    left: 0;
+    top: 50%;     /* centraliza verticalmente */
+    transform: translateY(-50%);
+    height: 80vh; /* ajusta a altura para ocupar 80% da tela */
+    width: 300px; /* largura quando aberto */
+    transition: width 0.3s ease-in-out;
+}
+
+.sidebar.closed {
+    width: 100px; /* largura quando fechado */
+}
+
+/* oculta os textos quando o menu está fechado */
+.sidebar.closed .itemDescription {
+    display: none;
+}
+
+.sidebarContent {
+    padding:  1rem;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: 1.5rem;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.userInfos {
+    display: flex;
+    flex-direction: column;
+    color: #F7F7F7;
+}
+
+.userInfos span:last-child {
+    color: #d1d1d18f;
+    font-size: .8rem;
+}
+
+.sideItems {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;  /* remove o padding padrão da <ul> */
+    margin: 0;   /* remove qualquer margem extra */
+    width: 100%; /* garante que os itens ocupem a largura total */
+}
+
+.sideItems a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+    color: #F7F7F7;
+}
+
+/* centraliza os ícones quando fechado */
+.sidebar.closed .sideItems a {
+    justify-content: center;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    gap: .8rem;
+}
+
+.sideItem{
+    border-radius: 8px;
+    padding: .8rem 1.5rem;
+    cursor: pointer;
+}
+
+/* ajusta padding dos itens quando fechado */
+.sidebar.closed .sideItem {
+    padding: .8rem 1.5rem;
+}
+
+/* add hover para o item que estiver ativo */
+.sideItem.active {
+    background-color: #384c6b;
+    color: white;
+    border-radius: 8px;
+}
+
+/* adiciona hover apenas para os itens que NÃO estiverem ativos */
+.sideItem:hover:not(.active),
+.logoutBtn:hover {
+    background-color: #1d304d;
+}
+
+.logout {
+    border-top: 1px solid #384c6b;
+    padding: 1rem;
+    display: flex;
+}
+
+.logoutBtn {
+    display: flex;
+    font-family: 'Poppins';
+    border: none;
+    padding: .8rem 1.5rem;
+    font-size: 14px;
+    gap: 1rem;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: transparent;
+    background: none;
+    color: #F7F7F7;
+    box-shadow: none;
+    outline: none;
+    width: 100%;
+}
+
+.logoutBtn span{
+    font-size: 1rem;
+}
+
+.openBtn {
+    position: absolute;
+    top: 3rem;
+    right: -1.2rem;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+/* ajusta o botão para girar ao abrir/fechar */
+.rotated {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+}
