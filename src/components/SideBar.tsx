@@ -1,6 +1,7 @@
 "use client"; // para usar hooks no App Router
 
 import Image from "next/image";
+import Link from "next/link";
 import styles from "@/styles/SideBar.module.css";
 import { usePathname } from "next/navigation"; // usa usePathname ao invés de useRouter
 import { useState } from "react"; // importa useState para alternar menu
@@ -36,24 +37,24 @@ export function SideBar() {
 
         <ul className={styles.sideItems} id="side_items">
           <li className={`${styles.sideItem} ${pathname === "/" ? styles.active : ""}`}>
-            <a href="/">
+            <Link href="/">
               <Image src={Home} alt="Ícone de início" className={styles.icons} />
               {isOpen && <span className={styles.itemDescription}>Início</span>}
-            </a>
+            </Link>
           </li>
 
-          <li className={`${styles.sideItem} ${pathname === "/produtos" ? styles.active : ""}`}>
-            <a href="/produtos">
+          <li className={`${styles.sideItem} ${pathname === "/products" ? styles.active : ""}`}>
+            <Link href="/products">
               <Image src={Product} alt="Ícone de produtos" className={styles.icons} />
               {isOpen && <span className={styles.itemDescription}>Produtos</span>}
-            </a>
+            </Link>
           </li>
 
-          <li className={`${styles.sideItem} ${pathname === "/resultados" ? styles.active : ""}`}>
-            <a href="/resultados">
+          <li className={`${styles.sideItem} ${pathname === "/results" ? styles.active : ""}`}>
+            <Link href="/results">
               <Image src={Chart} alt="Ícone do gráfico" className={styles.icons} />
               {isOpen && <span className={styles.itemDescription}>Resultados</span>}
-            </a>
+            </Link>
           </li>
         </ul>
 
