@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from '@/styles/products.module.css';
 import Add from '@/assets/add.svg';
+import EditIcon from '@/assets/edit.svg'; // Ícone de editar
+import TrashIcon from '@/assets/trash.svg'; // Ícone de remover
 
 const Products = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -14,7 +16,8 @@ const Products = () => {
     category: 'comida',
   });
 
-  // Função para formatar o preço como moeda brasileira
+  const [editingProductId, setEditingProductId] = useState<number | null>(null);
+
   const formatPrice = (value: number) => {
     return value.toLocaleString('pt-BR', {
       style: 'currency',
@@ -22,71 +25,90 @@ const Products = () => {
     });
   };
 
-  // Função para converter o valor do input para número corretamente
   const parsePrice = (value: string): number => {
-    // Substituir vírgula por ponto e converter para número
     return parseFloat(value.replace(',', '.').replace(/[^\d.]/g, '')) || 0;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
-    if (name === 'price') {
-      setFormData((prevState) => ({
-        ...prevState,
-        price: value, // Mantém a vírgula para exibição correta no input
-      }));
-    } else {
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const existingProduct = products.find(
-      (product) => product.productName === formData.productName
-    );
 
     const newPrice = parsePrice(formData.price);
     const newQuantity = parseInt(formData.quantity);
 
-    if (existingProduct) {
-      // Atualiza a média do preço e soma as quantidades
+    if (editingProductId !== null) {
       const updatedProducts = products.map((product) =>
-        product.productName === formData.productName
+        product.id === editingProductId
           ? {
               ...product,
-              quantity: product.quantity + newQuantity,
-              price: (product.price * product.quantity + newPrice * newQuantity) / (product.quantity + newQuantity),
+              productName: formData.productName,
+              quantity: newQuantity,
+              price: newPrice,
+              category: formData.category,
             }
           : product
       );
 
       setProducts(updatedProducts);
+      setEditingProductId(null);
     } else {
-      // Adiciona um novo produto
-      setProducts((prevProducts) => [
-        ...prevProducts,
-        {
-          ...formData,
-          id: Date.now(),
-          price: newPrice, // Converte para número antes de salvar
-          quantity: newQuantity,
-        },
-      ]);
+      const existingProduct = products.find(
+        (product) => product.productName === formData.productName
+      );
+
+      if (existingProduct) {
+        const updatedProducts = products.map((product) =>
+          product.productName === formData.productName
+            ? {
+                ...product,
+                quantity: product.quantity + newQuantity,
+                price: (product.price * product.quantity + newPrice * newQuantity) / (product.quantity + newQuantity),
+              }
+            : product
+        );
+
+        setProducts(updatedProducts);
+      } else {
+        setProducts((prevProducts) => [
+          ...prevProducts,
+          {
+            ...formData,
+            id: Date.now(),
+            price: newPrice,
+            quantity: newQuantity,
+          },
+        ]);
+      }
     }
 
-    // Resetando o formulário
     setFormData({
       productName: '',
       quantity: '',
       price: '',
       category: 'comida',
     });
+  };
+
+  const handleEdit = (product: any) => {
+    setEditingProductId(product.id);
+    setFormData({
+      productName: product.productName,
+      quantity: product.quantity.toString(),
+      price: product.price.toString().replace('.', ','),
+      category: product.category,
+    });
+  };
+
+  const handleRemove = (productId: number) => {
+    setProducts(products.filter((product) => product.id !== productId));
   };
 
   return (
@@ -98,7 +120,7 @@ const Products = () => {
 
         <form onSubmit={handleSubmit} className={styles['form-box']}>
           <div className={styles['form-title']}>
-            <h2>Adicionar produtos</h2>
+            <h2>{editingProductId ? 'Editar Produto' : 'Adicionar Produtos'}</h2>
           </div>
 
           <div className={styles['form-group']}>
@@ -110,6 +132,7 @@ const Products = () => {
               value={formData.productName}
               onChange={handleChange}
               placeholder="Nome do produto"
+              disabled={editingProductId !== null}
             />
           </div>
 
@@ -156,7 +179,7 @@ const Products = () => {
 
           <div className={styles['form-btn']}>
             <button type="submit">
-              <span>Adicionar</span>
+              <span>{editingProductId ? 'Salvar' : 'Adicionar'}</span>
               <Image 
                 src={Add}
                 alt="Ícone do botão de adicionar"
@@ -175,6 +198,7 @@ const Products = () => {
           <span>Quantidade</span>
           <span>Preço</span>
           <span>Seção</span>
+          <span>Ações</span>
         </div>
         {products.map((product) => (
           <div key={product.id} className={styles['product-item']}>
@@ -182,6 +206,14 @@ const Products = () => {
             <span>{product.quantity}</span>
             <span>{formatPrice(product.price)}</span>
             <span>{product.category}</span>
+            <div className={styles['actions']}>
+              <button onClick={() => handleEdit(product)}>
+                <Image src={EditIcon} alt="Editar" width={20} height={20} />
+              </button>
+              <button onClick={() => handleRemove(product.id)}>
+                <Image src={TrashIcon} alt="Remover" width={20} height={20} />
+              </button>
+            </div>
           </div>
         ))}
       </div>
