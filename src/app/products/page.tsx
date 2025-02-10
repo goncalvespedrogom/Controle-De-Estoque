@@ -134,7 +134,7 @@ const Products = () => {
 
         <form onSubmit={handleSubmit} className={styles['form-box']}>
           <div className={styles['form-title']}>
-            <h2>{editingProductId ? 'Editar Produto' : 'Adicionar Produtos'}</h2>
+            <h2>{editingProductId ? 'Editar produto' : 'Adicionar produtos'}</h2>
           </div>
 
           {errorMessage && <p className={styles['error-message']}>{errorMessage}</p>}
@@ -184,18 +184,18 @@ const Products = () => {
               value={formData.category}
               onChange={handleChange}
             >
-              <option value="comida">Comida</option>
-              <option value="bebida">Bebida</option>
-              <option value="lazer">Lazer</option>
-              <option value="transporte">Transporte</option>
-              <option value="manutencao">Manutenção</option>
-              <option value="outros">Outros</option>
+              <option value="Comida">Comida</option>
+              <option value="Bebida">Bebida</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Manutencao">Manutenção</option>
+              <option value="Outros">Outros</option>
             </select>
           </div>
 
           <div className={styles['form-btn']}>
             <button type="submit">
-              <span>{editingProductId ? 'Salvar' : 'Adicionar'}</span>
+              <span>{editingProductId ? 'Editar' : 'Adicionar'}</span>
               <Image 
                 src={Add}
                 alt="Ícone do botão de adicionar"
@@ -207,13 +207,8 @@ const Products = () => {
         </form>
       </div>
 
-
-
       <div className={styles['product-box']}>
-
         <h1>Lista de Produtos</h1>
-
-
         <div className={styles['product-list']}>
           <div className={styles['product-header']}>
             <span>Nome</span>
@@ -241,7 +236,6 @@ const Products = () => {
           ))}
         </div>
       </div>
-
     </div>
   );
 };
