@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from '@/styles/products.module.css';
 import Add from '@/assets/add.svg';
-import EditIcon from '@/assets/edit.svg'; // Ícone de editar
-import TrashIcon from '@/assets/trash.svg'; // Ícone de remover
+import EditIcon from '@/assets/edit.svg';
+import TrashIcon from '@/assets/trash.svg';
 
 const Products = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -16,6 +16,7 @@ const Products = () => {
     category: 'comida',
   });
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [editingProductId, setEditingProductId] = useState<number | null>(null);
 
   const formatPrice = (value: number) => {
@@ -36,6 +37,9 @@ const Products = () => {
       ...prevState,
       [name]: value,
     }));
+
+    // Remove a mensagem de erro ao corrigir os campos
+    setErrorMessage(null);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -43,6 +47,15 @@ const Products = () => {
 
     const newPrice = parsePrice(formData.price);
     const newQuantity = parseInt(formData.quantity);
+
+    if (!formData.productName.trim()) {
+      setErrorMessage("O nome do produto é obrigatório.");
+      return;
+    }
+    if (!formData.quantity.trim() || isNaN(newQuantity) || newQuantity <= 0) {
+      setErrorMessage("A quantidade deve ser um número maior que zero.");
+      return;
+    }
 
     if (editingProductId !== null) {
       const updatedProducts = products.map((product) =>
@@ -61,12 +74,12 @@ const Products = () => {
       setEditingProductId(null);
     } else {
       const existingProduct = products.find(
-        (product) => product.productName === formData.productName
+        (product) => product.productName.toLowerCase() === formData.productName.toLowerCase()
       );
 
       if (existingProduct) {
         const updatedProducts = products.map((product) =>
-          product.productName === formData.productName
+          product.productName.toLowerCase() === formData.productName.toLowerCase()
             ? {
                 ...product,
                 quantity: product.quantity + newQuantity,
@@ -95,6 +108,8 @@ const Products = () => {
       price: '',
       category: 'comida',
     });
+
+    setErrorMessage(null);
   };
 
   const handleEdit = (product: any) => {
@@ -122,6 +137,9 @@ const Products = () => {
           <div className={styles['form-title']}>
             <h2>{editingProductId ? 'Editar Produto' : 'Adicionar Produtos'}</h2>
           </div>
+
+          {/* Exibição da mensagem de erro */}
+          {errorMessage && <p className={styles['error-message']}>{errorMessage}</p>}
 
           <div className={styles['form-group']}>
             <label htmlFor="productName">Nome</label>
