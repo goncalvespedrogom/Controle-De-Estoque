@@ -7,10 +7,9 @@
     flex-direction: column;
     justify-content: space-between;
     border-radius: 0px 10px 10px 0;
-    position: fixed; /* mantém fixo na tela */
+    position: relative; /* mantém fixo na tela */
     left: 0;
-    top: 50%;     /* centraliza verticalmente */
-    transform: translateY(-50%);
+    margin: auto 0;
     height: 80vh; /* ajusta a altura para ocupar 80% da tela */
     width: 300px; /* largura quando aberto */
     transition: width 0.3s ease-in-out;
