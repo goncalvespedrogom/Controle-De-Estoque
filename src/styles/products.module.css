@@ -1,6 +1,6 @@
 /* src/styles/products.module.css */
 .products-container {
-  background-color: green;
+
   display: flex;
   margin: 0;
   padding: 0;
@@ -13,7 +13,7 @@
 
 .product-form {
   background-color: #1a2a41;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   padding: .5rem 2rem;
@@ -107,29 +107,81 @@
   background-color: #1a2a41ab;
 }
 
-.product-list {
-  padding: 1.2rem 2rem;
+
+
+.product-box{
+  background-color: #1a2a41;
+  display: flex;
   width: 70%;
+  flex-direction: column;
+
+  margin-left: 1rem;
+
+  border-radius: 10px;
+}
+
+.product-box h1{
+  color: #384c6b;
+  font-weight: 700;
+  font-size: 2rem;
+  padding: 1.8rem 1rem 1.3rem;
+  margin: 0 auto;
+
+
+}
+
+.product-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 85%; /* Define a altura máxima da área rolável */
+  overflow-y: auto; /* Ativa a rolagem apenas para os produtos */
+  width: 95%;
+  border-radius: 10px;
+  color: #F7F7F7;
+  margin: 0 auto;
+  background-color: #384c6b;
+}
+
+.product-header, .product-item {
+  display: grid;
+  grid-template-columns: 3fr 2fr 2fr 2fr 1fr; /* 1fr para cada coluna de produto */
+  gap: 10px;
+  align-items: center;
 }
 
 .product-header {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #ddd;
-  font-weight: bold;
-  font-size: 1.1rem;
+  position: sticky;
+  top: 0;
+  background-color: #384c6b;
+  z-index: 1; /* Garante que o título da coluna fique acima da lista de produtos */
+  padding: 10px;
+  font-weight: 700;
+  color: #F7F7F7;
+  border-bottom: 1px solid #1a2a41;
 }
 
 .product-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+  padding: .8rem;
+  border-bottom: 1px solid #1a2a41;
 }
 
 .product-item span {
-  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Garante que o texto não ultrapasse o limite da célula */
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  margin-left: -2rem;
 }

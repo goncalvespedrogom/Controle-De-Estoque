@@ -38,7 +38,6 @@ const Products = () => {
       [name]: value,
     }));
 
-    // Remove a mensagem de erro ao corrigir os campos
     setErrorMessage(null);
   };
 
@@ -138,7 +137,6 @@ const Products = () => {
             <h2>{editingProductId ? 'Editar Produto' : 'Adicionar Produtos'}</h2>
           </div>
 
-          {/* Exibição da mensagem de erro */}
           {errorMessage && <p className={styles['error-message']}>{errorMessage}</p>}
 
           <div className={styles['form-group']}>
@@ -209,32 +207,41 @@ const Products = () => {
         </form>
       </div>
 
-      <div className={styles['product-list']}>
-        <h2>Lista de Produtos</h2>
-        <div className={styles['product-header']}>
-          <span>Nome</span>
-          <span>Quantidade</span>
-          <span>Preço</span>
-          <span>Seção</span>
-          <span>Ações</span>
-        </div>
-        {products.map((product) => (
-          <div key={product.id} className={styles['product-item']}>
-            <span>{product.productName}</span>
-            <span>{product.quantity}</span>
-            <span>{formatPrice(product.price)}</span>
-            <span>{product.category}</span>
-            <div className={styles['actions']}>
-              <button onClick={() => handleEdit(product)}>
-                <Image src={EditIcon} alt="Editar" width={20} height={20} />
-              </button>
-              <button onClick={() => handleRemove(product.id)}>
-                <Image src={TrashIcon} alt="Remover" width={20} height={20} />
-              </button>
-            </div>
+
+
+      <div className={styles['product-box']}>
+
+        <h1>Lista de Produtos</h1>
+
+
+        <div className={styles['product-list']}>
+          <div className={styles['product-header']}>
+            <span>Nome</span>
+            <span>Quantidade</span>
+            <span>Preço</span>
+            <span>Seção</span>
+            <span>Ações</span>
           </div>
-        ))}
+
+          {products.map((product) => (
+            <div key={product.id} className={styles['product-item']}>
+              <span>{product.productName}</span>
+              <span>{product.quantity}</span>
+              <span>{formatPrice(product.price)}</span>
+              <span>{product.category}</span>
+              <div className={styles['actions']}>
+                <button onClick={() => handleEdit(product)}>
+                  <Image src={EditIcon} alt="Editar" width={25} height={25} />
+                </button>
+                <button onClick={() => handleRemove(product.id)}>
+                  <Image src={TrashIcon} alt="Remover" width={25} height={25} />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
+
     </div>
   );
 };
