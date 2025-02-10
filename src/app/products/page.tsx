@@ -9,18 +9,35 @@ import Add from '@/assets/add.svg';
 import EditIcon from '@/assets/edit.svg';
 import TrashIcon from '@/assets/trash.svg';
 
+// Definindo o tipo do produto
+interface Product {
+  id: number;
+  productName: string;
+  quantity: number;
+  price: number;
+  category: string;
+}
+
+// Definindo o tipo dos dados do formulário
+interface FormData {
+  productName: string;
+  quantity: string;
+  price: string;
+  category: string;
+}
+
 const Products = () => {
-  const [products, setProducts] = useState<any[]>([]);
-  const [formData, setFormData] = useState({
+  const [products, setProducts] = useState<Product[]>([]); // Usando o tipo Product no estado
+  const [formData, setFormData] = useState<FormData>({
     productName: '',
     quantity: '',
     price: '',
     category: 'comida',
   });
-
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [editingProductId, setEditingProductId] = useState<number | null>(null);
 
+  // Função para formatar o preço
   const formatPrice = (value: number) => {
     return value.toLocaleString('pt-BR', {
       style: 'currency',
@@ -28,10 +45,12 @@ const Products = () => {
     });
   };
 
+  // Função para parsear o preço
   const parsePrice = (value: string): number => {
     return parseFloat(value.replace(',', '.').replace(/[^\d.]/g, '')) || 0;
   };
 
+  // Função para lidar com as mudanças nos campos do formulário
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
 
@@ -43,12 +62,14 @@ const Products = () => {
     setErrorMessage(null);
   };
 
+  // Função para lidar com o envio do formulário
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const newPrice = parsePrice(formData.price);
     const newQuantity = parseInt(formData.quantity);
 
+    // Validações
     if (!formData.productName.trim()) {
       setErrorMessage("O nome do produto é obrigatório.");
       return;
@@ -58,6 +79,7 @@ const Products = () => {
       return;
     }
 
+    // Lógica para editar ou adicionar produto
     if (editingProductId !== null) {
       const updatedProducts = products.map((product) =>
         product.id === editingProductId
@@ -103,6 +125,7 @@ const Products = () => {
       }
     }
 
+    // Resetando o formulário
     setFormData({
       productName: '',
       quantity: '',
@@ -113,7 +136,8 @@ const Products = () => {
     setErrorMessage(null);
   };
 
-  const handleEdit = (product: any) => {
+  // Função para editar um produto
+  const handleEdit = (product: Product) => {
     setEditingProductId(product.id);
     setFormData({
       productName: product.productName,
@@ -123,6 +147,7 @@ const Products = () => {
     });
   };
 
+  // Função para remover um produto
   const handleRemove = (productId: number) => {
     setProducts(products.filter((product) => product.id !== productId));
   };
