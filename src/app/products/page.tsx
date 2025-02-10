@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import styles from '@/styles/products.module.css'; // Importando o CSS
-
-import Add from '@/assets/add.svg'
+import styles from '@/styles/products.module.css';
+import Add from '@/assets/add.svg';
 
 const Products = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -15,43 +14,73 @@ const Products = () => {
     category: 'comida',
   });
 
+  // Função para formatar o preço como moeda brasileira
+  const formatPrice = (value: number) => {
+    return value.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+  };
+
+  // Função para converter o valor do input para número corretamente
+  const parsePrice = (value: string): number => {
+    // Substituir vírgula por ponto e converter para número
+    return parseFloat(value.replace(',', '.').replace(/[^\d.]/g, '')) || 0;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    if (name === 'price') {
+      setFormData((prevState) => ({
+        ...prevState,
+        price: value, // Mantém a vírgula para exibição correta no input
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
     const existingProduct = products.find(
       (product) => product.productName === formData.productName
     );
 
+    const newPrice = parsePrice(formData.price);
+    const newQuantity = parseInt(formData.quantity);
+
     if (existingProduct) {
-      // Se o produto já existe, atualizamos ele
+      // Atualiza a média do preço e soma as quantidades
       const updatedProducts = products.map((product) =>
         product.productName === formData.productName
           ? {
               ...product,
-              quantity: parseInt(product.quantity) + parseInt(formData.quantity),
-              price:
-                (parseFloat(product.price) * parseInt(product.quantity) +
-                  parseFloat(formData.price) * parseInt(formData.quantity)) /
-                (parseInt(product.quantity) + parseInt(formData.quantity)),
+              quantity: product.quantity + newQuantity,
+              price: (product.price * product.quantity + newPrice * newQuantity) / (product.quantity + newQuantity),
             }
           : product
       );
+
       setProducts(updatedProducts);
     } else {
-      // Se o produto não existe, adicionamos um novo produto
+      // Adiciona um novo produto
       setProducts((prevProducts) => [
         ...prevProducts,
-        { ...formData, id: Date.now() },
+        {
+          ...formData,
+          id: Date.now(),
+          price: newPrice, // Converte para número antes de salvar
+          quantity: newQuantity,
+        },
       ]);
     }
 
+    // Resetando o formulário
     setFormData({
       productName: '',
       quantity: '',
@@ -99,7 +128,7 @@ const Products = () => {
           <div className={styles['form-group']}>
             <label htmlFor="price">Preço</label>
             <input
-              type="number"
+              type="text"
               id="price"
               name="price"
               value={formData.price}
@@ -151,7 +180,7 @@ const Products = () => {
           <div key={product.id} className={styles['product-item']}>
             <span>{product.productName}</span>
             <span>{product.quantity}</span>
-            <span>{product.price}</span>
+            <span>{formatPrice(product.price)}</span>
             <span>{product.category}</span>
           </div>
         ))}
