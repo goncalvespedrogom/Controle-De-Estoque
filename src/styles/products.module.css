@@ -1,0 +1,135 @@
+/* src/styles/products.module.css */
+.products-container {
+  background-color: green;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 80vh;
+  margin: auto 0;
+  margin-left: 3rem;
+  width: 80%;
+}
+
+.product-form {
+  background-color: #1a2a41;
+  border-radius: 10px 0px 0px 10px;
+  display: flex;
+  flex-direction: column;
+  padding: .5rem 2rem;
+  width: 25%;
+}
+
+.product-title {
+  color: #384c6b;
+  font-weight: 700;
+  text-align: center;
+}
+
+.form-title {
+  border-bottom: 1px solid #1a2a41;
+  margin-bottom: 1rem;
+  display: flex;
+  width: 100%;
+}
+
+.form-title h2 {
+  color: #F7F7F7;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding: 0rem 1rem;
+}
+
+.product-form .form-box {
+  background-color: #384c6b;
+  border-radius: 10px;
+}
+
+.product-form .form-box input {
+  color: black;
+  background-color: #F7F7F7;
+}
+
+.product-form .form-group {
+  padding: .0rem 1rem;
+  color: #1a2a41;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.product-form label {
+  display: block;
+}
+
+.product-form input,
+.product-form select {
+  width: 95%;
+  padding: 1rem .5rem;
+  margin-top: .2rem;
+  margin-bottom: .8rem;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+
+.product-form select {
+  width: 100%;
+}
+
+.product-form .form-btn {
+  display: flex;
+  padding: 0rem 1rem;
+  padding-bottom: 1rem;
+  justify-content: end;
+  margin-top: .5rem;
+}
+
+.product-form button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: #1a2a41;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.product-form button span {
+  padding-top: .1rem;
+  color: #F7F7F7;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.product-form button:hover {
+  background-color: #1a2a41ab;
+}
+
+.product-list {
+  padding: 1.2rem 2rem;
+  width: 70%;
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.product-item span {
+  font-size: 1rem;
+}
