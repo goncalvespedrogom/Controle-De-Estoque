@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from '@/styles/products.module.css';
+
+/* ícones */
 import Add from '@/assets/add.svg';
 import EditIcon from '@/assets/edit.svg';
 import TrashIcon from '@/assets/trash.svg';
