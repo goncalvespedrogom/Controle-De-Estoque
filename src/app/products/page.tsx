@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import styles from "@/styles/products.module.css";
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import styles from '@/styles/products.module.css';
 
 /* ícones */
-import Add from "@/assets/add.svg";
-import EditIcon from "@/assets/edit.svg";
-import TrashIcon from "@/assets/trash.svg";
+import Add from '@/assets/add.svg';
+import EditIcon from '@/assets/edit.svg';
+import TrashIcon from '@/assets/trash.svg';
 
 // Definindo o tipo do produto
 interface Product {
@@ -27,57 +27,62 @@ interface FormData {
 }
 
 const Products = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [formData, setFormData] = useState<FormData>({
-    productName: "",
-    quantity: "",
-    price: "",
-    category: "comida",
+  const [products, setProducts] = useState<Product[]>(() => {
+    if (typeof window !== "undefined") {
+      const storedProducts = localStorage.getItem("products");
+      return storedProducts ? JSON.parse(storedProducts) : [];
+    }
+    return [];
   });
+
+  const [formData, setFormData] = useState<FormData>({
+    productName: '',
+    quantity: '',
+    price: '',
+    category: 'Comida',
+  });
+
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [editingProductId, setEditingProductId] = useState<number | null>(null);
 
-  // Carregar produtos do localStorage quando o componente for montado
+  // Atualizar localStorage sempre que a lista de produtos mudar
   useEffect(() => {
-    const storedProducts = localStorage.getItem("products");
-    if (storedProducts) {
-      setProducts(JSON.parse(storedProducts));
+    if (products.length > 0) {
+      localStorage.setItem('products', JSON.stringify(products));
     }
-  }, []);
-
-  // Salvar produtos no localStorage sempre que a lista for alterada
-  useEffect(() => {
-    localStorage.setItem("products", JSON.stringify(products));
   }, [products]);
 
+  // Função para formatar o preço
   const formatPrice = (value: number) => {
-    return value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
+    return value.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
     });
   };
 
+  // Função para parsear o preço
   const parsePrice = (value: string): number => {
-    return parseFloat(value.replace(",", ".").replace(/[^\d.]/g, "")) || 0;
+    return parseFloat(value.replace(',', '.').replace(/[^\d.]/g, '')) || 0;
   };
 
+  // Função para lidar com as mudanças nos campos do formulário
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-
     setErrorMessage(null);
   };
 
+  // Função para lidar com o envio do formulário
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const newPrice = parsePrice(formData.price);
     const newQuantity = parseInt(formData.quantity);
 
+    // Validações
     if (!formData.productName.trim()) {
       setErrorMessage("O nome do produto é obrigatório.");
       return;
@@ -87,6 +92,7 @@ const Products = () => {
       return;
     }
 
+    // Lógica para editar ou adicionar produto
     if (editingProductId !== null) {
       const updatedProducts = products.map((product) =>
         product.id === editingProductId
@@ -113,9 +119,7 @@ const Products = () => {
             ? {
                 ...product,
                 quantity: product.quantity + newQuantity,
-                price:
-                  (product.price * product.quantity + newPrice * newQuantity) /
-                  (product.quantity + newQuantity),
+                price: (product.price * product.quantity + newPrice * newQuantity) / (product.quantity + newQuantity),
               }
             : product
         );
@@ -134,46 +138,49 @@ const Products = () => {
       }
     }
 
+    // Resetando o formulário
     setFormData({
-      productName: "",
-      quantity: "",
-      price: "",
-      category: "comida",
+      productName: '',
+      quantity: '',
+      price: '',
+      category: 'Comida',
     });
 
     setErrorMessage(null);
   };
 
+  // Função para editar um produto
   const handleEdit = (product: Product) => {
     setEditingProductId(product.id);
     setFormData({
       productName: product.productName,
       quantity: product.quantity.toString(),
-      price: product.price.toString().replace(".", ","),
+      price: product.price.toString().replace('.', ','),
       category: product.category,
     });
   };
 
+  // Função para remover um produto
   const handleRemove = (productId: number) => {
     const updatedProducts = products.filter((product) => product.id !== productId);
     setProducts(updatedProducts);
   };
 
   return (
-    <div className={styles["products-container"]}>
-      <div className={styles["product-form"]}>
-        <div className={styles["product-title"]}>
+    <div className={styles['products-container']}>
+      <div className={styles['product-form']}>
+        <div className={styles['product-title']}>
           <h1>Controle do Estoque</h1>
         </div>
 
-        <form onSubmit={handleSubmit} className={styles["form-box"]}>
-          <div className={styles["form-title"]}>
-            <h2>{editingProductId ? "Editar produto" : "Adicionar produtos"}</h2>
+        <form onSubmit={handleSubmit} className={styles['form-box']}>
+          <div className={styles['form-title']}>
+            <h2>{editingProductId ? 'Editar produto' : 'Adicionar produtos'}</h2>
           </div>
 
-          {errorMessage && <p className={styles["error-message"]}>{errorMessage}</p>}
+          {errorMessage && <p className={styles['error-message']}>{errorMessage}</p>}
 
-          <div className={styles["form-group"]}>
+          <div className={styles['form-group']}>
             <label htmlFor="productName">Nome</label>
             <input
               type="text"
@@ -186,7 +193,7 @@ const Products = () => {
             />
           </div>
 
-          <div className={styles["form-group"]}>
+          <div className={styles['form-group']}>
             <label htmlFor="quantity">Quantidade</label>
             <input
               type="number"
@@ -198,8 +205,8 @@ const Products = () => {
             />
           </div>
 
-          <div className={styles["form-group"]}>
-            <label htmlFor="price">Preço</label>
+          <div className={styles['form-group']}>
+            <label htmlFor="price">Preço unitário</label>
             <input
               type="text"
               id="price"
@@ -210,45 +217,55 @@ const Products = () => {
             />
           </div>
 
-          <div className={styles["form-group"]}>
+          <div className={styles['form-group']}>
             <label htmlFor="category">Seção</label>
-            <select id="category" name="category" value={formData.category} onChange={handleChange}>
+            <select
+              id="category"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+            >
               <option value="Comida">Comida</option>
               <option value="Bebida">Bebida</option>
               <option value="Lazer">Lazer</option>
               <option value="Transporte">Transporte</option>
-              <option value="Manutencao">Manutenção</option>
+              <option value="Manutenção">Manutenção</option>
               <option value="Outros">Outros</option>
             </select>
           </div>
 
-          <div className={styles["form-btn"]}>
+          <div className={styles['form-btn']}>
             <button type="submit">
-              <span>{editingProductId ? "Editar" : "Adicionar"}</span>
-              <Image src={Add} alt="Ícone do botão de adicionar" width={25} height={25} />
+              <span>{editingProductId ? 'Editar' : 'Adicionar'}</span>
+              <Image 
+                src={Add}
+                alt="Ícone do botão de adicionar"
+                width={25}
+                height={25}
+              />
             </button>
           </div>
         </form>
       </div>
 
-      <div className={styles["product-box"]}>
+      <div className={styles['product-box']}>
         <h1>Lista de Produtos</h1>
-        <div className={styles["product-list"]}>
-          <div className={styles["product-header"]}>
+        <div className={styles['product-list']}>
+          <div className={styles['product-header']}>
             <span>Nome</span>
             <span>Quantidade</span>
-            <span>Preço</span>
+            <span>Preço un.</span>
             <span>Seção</span>
             <span>Ações</span>
           </div>
 
           {products.map((product) => (
-            <div key={product.id} className={styles["product-item"]}>
+            <div key={product.id} className={styles['product-item']}>
               <span>{product.productName}</span>
               <span>{product.quantity}</span>
               <span>{formatPrice(product.price)}</span>
               <span>{product.category}</span>
-              <div className={styles["actions"]}>
+              <div className={styles['actions']}>
                 <button onClick={() => handleEdit(product)}>
                   <Image src={EditIcon} alt="Editar" width={25} height={25} />
                 </button>
