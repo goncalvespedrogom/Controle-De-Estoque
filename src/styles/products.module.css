@@ -62,8 +62,10 @@
 
 .product-form input,
 .product-form select {
-  width: 95%;
+  display: flex;
+  width: 97%;
   padding: 1rem .5rem;
+  margin: 0 auto;
   margin-top: .2rem;
   margin-bottom: .8rem;
   border: none;
@@ -73,6 +75,7 @@
 
 .product-form select {
   width: 100%;
+  margin: 0 auto;
 }
 
 .product-form .form-btn {
@@ -175,4 +178,39 @@
   cursor: pointer;
   padding: 0;
   margin-left: 0;
+}
+
+.error-message { 
+  background-color: #66070d;
+  color: #F7F7F7;
+  margin: 0 auto;
+  width: 50%;
+  padding: 1rem .5rem;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: .8rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-message {
+  visibility: hidden; /* Oculta sem remover o espaço */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.error-message.active {
+  visibility: visible; /* Torna visível quando necessário */
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -60,10 +60,15 @@ const Products = () => {
     });
   };
 
-  // Função para parsear o preço
-  const parsePrice = (value: string): number => {
-    return parseFloat(value.replace(',', '.').replace(/[^\d.]/g, '')) || 0;
-  };
+// Função para parsear o preço corretamente
+const parsePrice = (value: string): number => {
+  // Remove pontos usados como separadores de milhar (exemplo: "2.500,70" -> "2500,70")
+  const sanitizedValue = value.replace(/\./g, "").replace(",", ".");
+  
+  // Converte para número
+  return parseFloat(sanitizedValue) || 0;
+};
+
 
   // Função para lidar com as mudanças nos campos do formulário
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -178,7 +183,8 @@ const Products = () => {
             <h2>{editingProductId ? 'Editar produto' : 'Adicionar produtos'}</h2>
           </div>
 
-          {errorMessage && <p className={styles['error-message']}>{errorMessage}</p>}
+          {errorMessage && <p className={`${styles['error-message']} ${errorMessage ? styles['active'] : ''}`}>{errorMessage}</p>}
+
 
           <div className={styles['form-group']}>
             <label htmlFor="productName">Nome</label>
@@ -231,7 +237,11 @@ const Products = () => {
               <option value="Transporte">Transporte</option>
               <option value="Manutenção">Manutenção</option>
               <option value="Outros">Outros</option>
+              <option value="Roupas">Roupas</option>
+              <option value="Móveis">Móveis</option>
+              <option value="Ferramentas">Ferramentas</option>
             </select>
+
           </div>
 
           <div className={styles['form-btn']}>
