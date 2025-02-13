@@ -248,8 +248,18 @@ export function Dashboard() {
         <div className={styles["dashboard-box"]}>
           <h2>Maior seção</h2>
           <div className={styles["dashboard-second-content"]}>
-            <span>{mostPopularCategory.count || 0} Produtos</span>
-            <p>{mostPopularCategory.category || "Nenhuma"}</p>
+            <span>
+              {mostPopularCategory.count === 0
+                ? "Nenhuma"
+                : mostPopularCategory.count === 1
+                ? "1 Produto"
+                : `${mostPopularCategory.count} Produtos`}
+            </span>
+            <p>
+              {mostPopularCategory.count === 0
+                ? "Nenhuma"
+                : mostPopularCategory.category}
+            </p>
           </div>
         </div>
 
@@ -257,12 +267,19 @@ export function Dashboard() {
           <h2>Menor seção</h2>
           <div className={styles["dashboard-second-content"]}>
             <span>
-              {leastPopularCategory.count !== Infinity
-                ? leastPopularCategory.count
-                : 0}{" "}
-              Produtos
+              {leastPopularCategory.count === Infinity ||
+              leastPopularCategory.count === 0
+                ? "Nenhuma"
+                : leastPopularCategory.count === 1
+                ? "1 Produto"
+                : `${leastPopularCategory.count} Produtos`}
             </span>
-            <p>{leastPopularCategory.category || "Nenhuma"}</p>
+            <p>
+              {leastPopularCategory.count === Infinity ||
+              leastPopularCategory.count === 0
+                ? "Nenhuma"
+                : leastPopularCategory.category}
+            </p>
           </div>
         </div>
       </div>
