@@ -1,8 +1,9 @@
 import { Dashboard } from "@/components/Dashboard";
+import "./globals.css";
 
 export default function Home() {
   return (
-    <div>
+    <div className="dashboard">
       <Dashboard />
     </div>
   );

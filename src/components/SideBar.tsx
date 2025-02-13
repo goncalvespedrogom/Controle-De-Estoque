@@ -23,10 +23,18 @@ export function SideBar() {
   };
 
   return (
-    <nav className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`} id="sidebar">
+    <nav
+      className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}
+      id="sidebar"
+    >
       <div className={styles.sidebarContent} id="sidebar_content">
         <div className={styles.user} id="user">
-          <Image src={Avatar} alt="Foto do usuário" className={styles.avatar} id="user_avatar" />
+          <Image
+            src={Avatar}
+            alt="Foto do usuário"
+            className={styles.avatar}
+            id="user_avatar"
+          />
           {isOpen && (
             <p className={styles.userInfos} id="user_infos">
               <span className={styles.itemDescription}>Usuário</span>
@@ -36,24 +44,52 @@ export function SideBar() {
         </div>
 
         <ul className={styles.sideItems} id="side_items">
-          <li className={`${styles.sideItem} ${pathname === "/" ? styles.active : ""}`}>
+          <li
+            className={`${styles.sideItem} ${
+              pathname === "/" ? styles.active : ""
+            }`}
+          >
             <Link href="/">
-              <Image src={Home} alt="Ícone de início" className={styles.icons} />
+              <Image
+                src={Home}
+                alt="Ícone de início"
+                className={styles.icons}
+              />
               {isOpen && <span className={styles.itemDescription}>Início</span>}
             </Link>
           </li>
 
-          <li className={`${styles.sideItem} ${pathname === "/products" ? styles.active : ""}`}>
+          <li
+            className={`${styles.sideItem} ${
+              pathname === "/products" ? styles.active : ""
+            }`}
+          >
             <Link href="/products">
-              <Image src={Product} alt="Ícone de produtos" className={styles.icons} />
-              {isOpen && <span className={styles.itemDescription}>Produtos</span>}
+              <Image
+                src={Product}
+                alt="Ícone de produtos"
+                className={styles.icons}
+              />
+              {isOpen && (
+                <span className={styles.itemDescription}>Produtos</span>
+              )}
             </Link>
           </li>
 
-          <li className={`${styles.sideItem} ${pathname === "/results" ? styles.active : ""}`}>
+          <li
+            className={`${styles.sideItem} ${
+              pathname === "/results" ? styles.active : ""
+            }`}
+          >
             <Link href="/results">
-              <Image src={Chart} alt="Ícone do gráfico" className={styles.icons} />
-              {isOpen && <span className={styles.itemDescription}>Resultados</span>}
+              <Image
+                src={Chart}
+                alt="Ícone do gráfico"
+                className={styles.icons}
+              />
+              {isOpen && (
+                <span className={styles.itemDescription}>Resultados</span>
+              )}
             </Link>
           </li>
         </ul>

@@ -9,7 +9,7 @@ import Add from '@/assets/add.svg';
 import EditIcon from '@/assets/edit.svg';
 import TrashIcon from '@/assets/trash.svg';
 
-// Definindo o tipo do produto
+// definindo o tipo do produto
 interface Product {
   id: number;
   productName: string;
@@ -18,7 +18,7 @@ interface Product {
   category: string;
 }
 
-// Definindo o tipo dos dados do formulário
+// definindo o tipo dos dados do formulário
 interface FormData {
   productName: string;
   quantity: string;
@@ -45,14 +45,14 @@ const Products = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [editingProductId, setEditingProductId] = useState<number | null>(null);
 
-  // Atualizar localStorage sempre que a lista de produtos mudar
+  // atualizar localStorage sempre que a lista de produtos mudar
   useEffect(() => {
     if (products.length > 0) {
       localStorage.setItem('products', JSON.stringify(products));
     }
   }, [products]);
 
-  // Função para formatar o preço
+  // função para formatar o preço
   const formatPrice = (value: number) => {
     return value.toLocaleString('pt-BR', {
       style: 'currency',
@@ -60,17 +60,17 @@ const Products = () => {
     });
   };
 
-// Função para parsear o preço corretamente
+// função para parsear o preço corretamente
 const parsePrice = (value: string): number => {
-  // Remove pontos usados como separadores de milhar (exemplo: "2.500,70" -> "2500,70")
+  // remove pontos usados como separadores de milhar (exemplo: "2.500,70" -> "2500,70")
   const sanitizedValue = value.replace(/\./g, "").replace(",", ".");
   
-  // Converte para número
+  // converte para número
   return parseFloat(sanitizedValue) || 0;
 };
 
 
-  // Função para lidar com as mudanças nos campos do formulário
+  // função para lidar com as mudanças nos campos do formulário
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -80,14 +80,14 @@ const parsePrice = (value: string): number => {
     setErrorMessage(null);
   };
 
-  // Função para lidar com o envio do formulário
+  // função para lidar com o envio do formulário
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const newPrice = parsePrice(formData.price);
     const newQuantity = parseInt(formData.quantity);
 
-    // Validações
+    // validações
     if (!formData.productName.trim()) {
       setErrorMessage("O nome do produto é obrigatório.");
       return;
@@ -97,7 +97,7 @@ const parsePrice = (value: string): number => {
       return;
     }
 
-    // Lógica para editar ou adicionar produto
+    // lógica para editar ou adicionar produto
     if (editingProductId !== null) {
       const updatedProducts = products.map((product) =>
         product.id === editingProductId
@@ -143,7 +143,7 @@ const parsePrice = (value: string): number => {
       }
     }
 
-    // Resetando o formulário
+    // resetando o formulário
     setFormData({
       productName: '',
       quantity: '',
@@ -154,7 +154,7 @@ const parsePrice = (value: string): number => {
     setErrorMessage(null);
   };
 
-  // Função para editar um produto
+  // função para editar um produto
   const handleEdit = (product: Product) => {
     setEditingProductId(product.id);
     setFormData({
@@ -165,19 +165,18 @@ const parsePrice = (value: string): number => {
     });
   };
 
-  // Função para remover um produto
+  // função para remover um produto
   const handleRemove = (productId: number) => {
     const updatedProducts = products.filter((product) => product.id !== productId);
     setProducts(updatedProducts);
   
     if (updatedProducts.length === 0) {
-      localStorage.removeItem("products"); // Remove a chave se a lista ficar vazia
+      localStorage.removeItem("products"); // remove a chave se a lista ficar vazia
     } else {
       localStorage.setItem("products", JSON.stringify(updatedProducts));
     }
   };
   
-
   return (
     <div className={styles['products-container']}>
       <div className={styles['product-form']}>
@@ -191,7 +190,6 @@ const parsePrice = (value: string): number => {
           </div>
 
           {errorMessage && <p className={`${styles['error-message']} ${errorMessage ? styles['active'] : ''}`}>{errorMessage}</p>}
-
 
           <div className={styles['form-group']}>
             <label htmlFor="productName">Nome</label>
@@ -248,7 +246,6 @@ const parsePrice = (value: string): number => {
               <option value="Móveis">Móveis</option>
               <option value="Ferramentas">Ferramentas</option>
             </select>
-
           </div>
 
           <div className={styles['form-btn']}>
