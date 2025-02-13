@@ -13,6 +13,7 @@
   height: 80vh; /* ajusta a altura para ocupar 80% da tela */
   width: 300px; /* largura quando aberto */
   transition: width 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar.closed {

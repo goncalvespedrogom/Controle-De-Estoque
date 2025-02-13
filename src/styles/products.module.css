@@ -16,6 +16,7 @@
   flex-direction: column;
   padding: 0.5rem 2rem;
   width: 25%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .product-title {
@@ -42,6 +43,7 @@
 .product-form .form-box {
   background-color: #384c6b;
   border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .product-form .form-box input {
@@ -115,6 +117,7 @@
   flex-direction: column;
   margin-left: 1rem;
   border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .product-box h1 {
@@ -135,6 +138,7 @@
   color: #f7f7f7;
   margin: 0 auto;
   background-color: #384c6b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .product-header,
