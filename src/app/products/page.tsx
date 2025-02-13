@@ -169,7 +169,14 @@ const parsePrice = (value: string): number => {
   const handleRemove = (productId: number) => {
     const updatedProducts = products.filter((product) => product.id !== productId);
     setProducts(updatedProducts);
+  
+    if (updatedProducts.length === 0) {
+      localStorage.removeItem("products"); // Remove a chave se a lista ficar vazia
+    } else {
+      localStorage.setItem("products", JSON.stringify(updatedProducts));
+    }
   };
+  
 
   return (
     <div className={styles['products-container']}>
@@ -270,23 +277,27 @@ const parsePrice = (value: string): number => {
             <span>Ações</span>
           </div>
 
-          {products.map((product) => (
-            <div key={product.id} className={styles['product-item']}>
-              <span>{product.productName}</span>
-              <span>{product.quantity}</span>
-              <span>{formatPrice(product.price)}</span>
-              <span>{formatPrice(product.quantity * product.price)}</span>
-              <span>{product.category}</span>
-              <div className={styles['actions']}>
-                <button onClick={() => handleEdit(product)}>
-                  <Image src={EditIcon} alt="Editar" width={25} height={25} />
-                </button>
-                <button onClick={() => handleRemove(product.id)}>
-                  <Image src={TrashIcon} alt="Remover" width={25} height={25} />
-                </button>
+          {products.length === 0 ? (
+          <div className={styles['no-products']}>Nada registrado</div>
+          ) : (
+            products.map((product) => (
+              <div key={product.id} className={styles['product-item']}>
+                <span>{product.productName}</span>
+                <span>{product.quantity}</span>
+                <span>{formatPrice(product.price)}</span>
+                <span>{formatPrice(product.quantity * product.price)}</span>
+                <span>{product.category}</span>
+                <div className={styles['actions']}>
+                  <button onClick={() => handleEdit(product)}>
+                    <Image src={EditIcon} alt="Editar" width={25} height={25} />
+                  </button>
+                  <button onClick={() => handleRemove(product.id)}>
+                    <Image src={TrashIcon} alt="Remover" width={25} height={25} />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
