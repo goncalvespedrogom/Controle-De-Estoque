@@ -265,6 +265,7 @@ const parsePrice = (value: string): number => {
             <span>Nome</span>
             <span>Quantidade</span>
             <span>Preço un.</span>
+            <span>Preço total</span> 
             <span>Seção</span>
             <span>Ações</span>
           </div>
@@ -274,6 +275,7 @@ const parsePrice = (value: string): number => {
               <span>{product.productName}</span>
               <span>{product.quantity}</span>
               <span>{formatPrice(product.price)}</span>
+              <span>{formatPrice(product.quantity * product.price)}</span>
               <span>{product.category}</span>
               <div className={styles['actions']}>
                 <button onClick={() => handleEdit(product)}>

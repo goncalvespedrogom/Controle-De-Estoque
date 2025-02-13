@@ -139,7 +139,7 @@
 
 .product-header, .product-item {
   display: grid;
-  grid-template-columns: 3fr 2fr 2fr 2fr 1fr; /* 1fr para cada coluna de produto */
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr .4fr; /* 1fr para cada coluna de produto */
   gap: 10px;
   align-items: center;
 }
