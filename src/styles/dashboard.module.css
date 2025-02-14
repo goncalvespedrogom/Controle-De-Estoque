@@ -79,3 +79,43 @@
   justify-content: center;
   height: 70%;
 }
+
+@media screen and (max-width: 1795px) {
+  .dashboard-container {
+    margin-left: 2rem;
+    width: 95%;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 1445px) {
+  .dashboard-container {
+    height: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 1048px) {  /* aqui é o tamanho pra colocar o navbar mobile */
+  .dashboard-container {
+    height: 95%;
+    margin-right: 2rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem 0rem;
+  }
+
+  .dashboard-box {
+    max-width: 100%;
+  }
+}
