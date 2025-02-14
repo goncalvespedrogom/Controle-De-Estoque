@@ -106,8 +106,12 @@
 
 @media screen and (max-width: 1048px) {  /* aqui é o tamanho pra colocar o navbar mobile */
   .dashboard-container {
-    height: 95%;
-    margin-right: 2rem;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    margin: 2rem;
+    margin-top: 7.5rem;
+
   }
 
   .dashboard-grid {
@@ -117,5 +121,71 @@
 
   .dashboard-box {
     max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) { 
+  .dashboard-container {
+    height: 100%;
+    margin-left: 0;
+    width: 90%;
+    padding: 1rem 1rem;
+    padding-top: 0rem;
+    margin: 0 auto;
+    margin-top: 7rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .dashboard-grid {
+    padding-top: 0rem;
+    gap: 1rem 0rem;
+    margin: 0 auto;
+    width: 100%;
+    height: 85%;
+  }
+
+  .dashboard-box {
+    padding: 1rem;
+    min-width: 15rem;
+    min-height: 10rem;
+  }
+
+  .dashboard-title {
+    font-size: .8rem;
+  }
+
+  .dashboard-box h2 {
+    font-size: 1.2rem;
+  }
+  
+  .dashboard-box p {
+    font-size: 1rem;
+  }
+  
+  .dashboard-box span {
+    font-size: 2rem;
+  }
+  
+  .dashboard-box .dashboard-primary-price {
+    font-size: 2.7rem;
+  }
+  
+  .dashboard-primary-content {
+    height: 70%;
+  }
+  
+  .dashboard-second-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 75%;
+  }
+}
+
+@media screen and (max-width: 359px) { 
+  .dashboard-box {
+    padding: 1rem;
+    min-width: 0rem;
+    min-height: 9rem;
   }
 }

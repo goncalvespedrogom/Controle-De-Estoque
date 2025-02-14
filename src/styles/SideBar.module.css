@@ -154,3 +154,9 @@
   transform: rotate(180deg);
   transition: transform 0.3s ease-in-out;
 }
+
+@media screen and (max-width: 1048px) { 
+  .sidebar {
+    display: none;
+  }
+}

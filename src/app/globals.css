@@ -14,3 +14,18 @@ body {
   display: flex;
   width: 81%;
 }
+
+@media screen and (max-width: 1048px) {
+  .dashboard {
+    margin: 0 auto;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1048px) {
+  .dashboard {
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+  }
+}

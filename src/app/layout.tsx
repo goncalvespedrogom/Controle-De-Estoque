@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Geist_Mono } from "next/font/google"; // Substituindo Geist pelo Poppins
 import "./globals.css";
 import { SideBar } from "@/components/SideBar";
+import { MobileNav } from "@/components/MobileNav";
 
 // Define a fonte Poppins com diferentes pesos
 const poppins = Poppins({
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} ${geistMono.variable}`}>
         <SideBar />
+        <MobileNav />
         {children}
       </body>
     </html>
