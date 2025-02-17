@@ -104,14 +104,14 @@
   }
 }
 
-@media screen and (max-width: 1048px) {  /* aqui é o tamanho pra colocar o navbar mobile */
+@media screen and (max-width: 1048px) {
+  /* aqui é o tamanho pra colocar o navbar mobile */
   .dashboard-container {
     height: 100%;
     width: 100%;
     justify-content: center;
     margin: 2rem;
     margin-top: 7.5rem;
-
   }
 
   .dashboard-grid {
@@ -124,7 +124,7 @@
   }
 }
 
-@media screen and (max-width: 550px) { 
+@media screen and (max-width: 550px) {
   .dashboard-container {
     height: 100%;
     margin-left: 0;
@@ -151,29 +151,29 @@
   }
 
   .dashboard-title {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 
   .dashboard-box h2 {
     font-size: 1.2rem;
   }
-  
+
   .dashboard-box p {
     font-size: 1rem;
   }
-  
+
   .dashboard-box span {
     font-size: 2rem;
   }
-  
+
   .dashboard-box .dashboard-primary-price {
     font-size: 2.7rem;
   }
-  
+
   .dashboard-primary-content {
     height: 70%;
   }
-  
+
   .dashboard-second-content {
     display: flex;
     flex-direction: column;
@@ -182,7 +182,7 @@
   }
 }
 
-@media screen and (max-width: 359px) { 
+@media screen and (max-width: 359px) {
   .dashboard-box {
     padding: 1rem;
     min-width: 0rem;
