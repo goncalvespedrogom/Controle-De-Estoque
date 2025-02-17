@@ -224,3 +224,12 @@
     transform: translateY(0);
   }
 }
+
+@media screen and (max-width: 1825px) { 
+  .products-container {
+    margin: auto 0;
+    margin-left: 3rem;
+    margin-right: 2rem;
+    width: 80%;
+  }
+}

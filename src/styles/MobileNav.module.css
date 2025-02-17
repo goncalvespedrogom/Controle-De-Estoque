@@ -47,7 +47,7 @@
   }
   
   /* Exibir apenas em telas menores que 1040px */
-  @media (max-width: 1040px) {
+  @media (max-width: 1050px) {
     .mobileNav {
       display: flex;
     }
