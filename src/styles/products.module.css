@@ -299,10 +299,29 @@
 @media screen and (max-width: 1050px) {
   .products-container {
     margin: 0 auto;
-    margin-top: 4.5rem;
+    margin-top: 7rem;
     align-items: center;
-    padding: 0 .7rem;
+    padding: 0 1.5rem;
     width: 100%;
+  }
+
+  .product-form .form-box {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .product-form input,
+  .product-form select {
+    width: 95%;
+    margin: 0 auto;
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+    padding: 1rem 0.5rem;
+
+  }
+
+  .product-form select {
+    width: 98%;
   }
 }
 
@@ -310,7 +329,7 @@
   .products-container {
     margin: 0 auto;
     padding: 0 1rem;
-    margin-top: 7rem;
+    margin-top: 5.5rem;
     height: 100%;
     width: 100%;
     margin-bottom: 2rem;
@@ -324,32 +343,38 @@
   }
 
   .product-form {
-    background-color: #1a2a41;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem 1rem;
+
+    padding: 0.1rem 1rem;
     width: 90%;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
   }
   
   .product-form .form-box {
-    width: 18rem;
+    width: 100%;
     margin: 0 auto;
   }
 
   .product-form input,
   .product-form select {
-    width: 15rem;
+    width: 95%;
+    margin: 0 auto;
+    margin-top: .5rem;
+    margin-bottom: 1rem;
     padding: 1rem 0.5rem;
+
   }
 
   .product-form select {
-    width: 15.9rem;
+    width: 101%;
   }
 
   .product-box {
     width: 90%;
+    padding: 1rem;
+  }
+
+  .product-list {
+    width: 100%;
   }
 
   .product-header{
@@ -358,5 +383,11 @@
 
   .product-item {
     width: 30.5rem;
+  }
+
+  .product-box h1 {
+    font-size: 1.6rem;
+    padding: 0;
+    padding-bottom: 1rem;
   }
 }
