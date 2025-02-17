@@ -328,8 +328,8 @@
 @media screen and (max-width: 450px) {
   .products-container {
     margin: 0 auto;
-    padding: 0 1rem;
-    margin-top: 5.5rem;
+    padding: 0 1.1rem;
+    margin-top: 7rem;
     height: 100%;
     width: 100%;
     margin-bottom: 2rem;
@@ -343,7 +343,6 @@
   }
 
   .product-form {
-
     padding: 0.1rem 1rem;
     width: 90%;
     padding-bottom: 1rem;
@@ -361,7 +360,6 @@
     margin-top: .5rem;
     margin-bottom: 1rem;
     padding: 1rem 0.5rem;
-
   }
 
   .product-form select {
