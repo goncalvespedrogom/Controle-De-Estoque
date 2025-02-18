@@ -13,6 +13,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.results-mobile {
+  display: none;
+}
+
 .results-total {
   display: flex;
   width: 99%;
@@ -132,10 +136,19 @@
   }
 }
 
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 575px) {
+  .results-mobile {
+    display: flex;
+    color: #384c6b;
+    margin: 0 auto;
+    padding: 1rem .5rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
   .results-container {
-    width: 93.8%;
-    margin-top: 7rem;
+    width: 90%;
+    margin-top: 0rem;
   }
 
   .results-container h1 {
@@ -146,6 +159,7 @@
     font-weight: 700;
     font-size: 1.5rem;
     text-align: center;
+    display: none;
   }
 
   .results-box h2 {
@@ -175,6 +189,7 @@
     height: 100%;
     min-height: 100%;
     min-width: 250px;
+    display: none;
   }
 
   .results-right {
@@ -190,6 +205,7 @@
     margin-bottom: 0.3rem;
     margin-top: 1.5rem;
     font-size: 1rem;
+    display: none;
   }
 
   .results-box-pizza {
@@ -199,6 +215,7 @@
     height: 100%;
     min-height: 100%;
     padding: 0.5rem 0;
+    display: none;
   }
 }
 

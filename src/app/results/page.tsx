@@ -71,6 +71,11 @@ const Results = () => {
 
   return (
     <div className={styles["results-container"]}>
+
+      <div className={styles["results-mobile"]}>
+        <h2>Resultados com gráficos disponíveis na versão para desktop</h2>
+      </div>
+
       <h1>Resumo dos Produtos</h1>
 
       <div className={styles["results-total"]}>
