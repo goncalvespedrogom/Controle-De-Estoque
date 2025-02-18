@@ -1,7 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/dashboard.module.css";
+import List from "@/assets/list.svg"
+
 
 interface Product {
   id: number;
@@ -282,6 +285,17 @@ export function Dashboard() {
             </p>
           </div>
         </div>
+
+        <div className={styles["dashboard-box-second"]}>
+          <a href="/products">Ver lista completa</a>
+          <Image
+            src={List}
+            alt="Ícone da lista"
+            width={35}
+            height={35}
+          />
+        </div>
+
       </div>
     </div>
   );

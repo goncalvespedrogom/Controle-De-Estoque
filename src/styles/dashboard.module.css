@@ -80,6 +80,27 @@
   height: 70%;
 }
 
+.dashboard-box-second{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  color: #384c6b;
+  gap: .5rem;
+}
+
+.dashboard-box-second a{
+  color: #384c6b;
+  text-decoration: none;
+  font-size: 2.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dashboard-box-second a:hover{
+  border-bottom: 2px solid #384c6b;
+}
+
 @media screen and (max-width: 1795px) {
   .dashboard-container {
     margin-left: 2rem;
