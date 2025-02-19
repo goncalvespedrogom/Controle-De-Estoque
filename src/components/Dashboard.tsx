@@ -291,8 +291,8 @@ export function Dashboard() {
           <Image
             src={List}
             alt="Ícone da lista"
-            width={35}
-            height={35}
+            width={30}
+            height={30}
           />
         </div>
 

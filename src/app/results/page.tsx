@@ -89,7 +89,7 @@ const Results = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="Quantidade" fill="#2bc0a0" />
+                <Bar dataKey="Quantidade" fill="#f5ba3b" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -102,8 +102,8 @@ const Results = () => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="Preço Unitário" fill="#e0d42b" />
-                <Bar dataKey="Preço Total" fill="#9c1e9c" />
+                <Bar dataKey="Preço Unitário" fill="#FF6666" />
+                <Bar dataKey="Preço Total" fill="#0088FE" />
               </BarChart>
             </ResponsiveContainer>
           </div>

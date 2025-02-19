@@ -101,6 +101,12 @@
   border-bottom: 2px solid #384c6b;
 }
 
+@media screen and (max-width: 2000px){
+  .dashboard-box-second a{
+    font-size: 1.9rem;
+  }
+}
+
 @media screen and (max-width: 1795px) {
   .dashboard-container {
     margin-left: 2rem;
@@ -200,6 +206,10 @@
     flex-direction: column;
     justify-content: center;
     height: 75%;
+  }
+
+  .dashboard-box-second a{
+    font-size: 1.6rem;
   }
 }
 
